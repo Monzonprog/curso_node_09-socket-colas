@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-class ticket {
+class Ticket {
     constructor(numero, escritorio) {
         this.numero = numero;
         this.escritorio = escritorio;
@@ -28,7 +28,7 @@ class TicketControl {
     }
 
     init() {
-        const { hoy, tickets, ultimo, ultimos4 } = require('./db/data.json');
+        const { hoy, tickets, ultimo, ultimos4 } = require('../db/data.json');
         if (hoy === this.hoy) {
             this.tickets = tickets;
             this.ultimo = ultimo;
@@ -39,13 +39,14 @@ class TicketControl {
     }
 
     guardarDB() {
-        const dbPath = path.join(__dirname, './db/data.json');
+        const dbPath = path.join(__dirname, '../db/data.json');
         fs.writeFileSync(dbPath, JSON.stringify(this.toJson));
     }
 
     siguiente() {
         this.ultimo += 1;
-        this.tickets.push(new ticket(this.ultimo, null));
+        const ticket = new Ticket(this.ultimo, null);
+        this.tickets.push(ticket);
 
         this.guardarDB();
         return 'Ticket ' + ticket.numero;
