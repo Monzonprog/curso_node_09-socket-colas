@@ -9,9 +9,9 @@ class Ticket {
 }
 
 class TicketControl {
-    constructor() {
+    constructor() { 
         this.ultimo = 0;
-        this.hoy = new Date().getDate();
+        this.hoy = new Date().getDate(); // 11
         this.tickets = [];
         this.ultimos4 = [];
 
@@ -23,7 +23,7 @@ class TicketControl {
             ultimo: this.ultimo,
             hoy: this.hoy,
             tickets: this.tickets,
-            ultimos: this.ultimos4,
+            ultimos4: this.ultimos4,
         };
     }
 
@@ -34,6 +34,7 @@ class TicketControl {
             this.ultimo = ultimo;
             this.ultimos4 = ultimos4;
         } else {
+            // Es otro dia
             this.guardarDB();
         }
     }
@@ -57,7 +58,7 @@ class TicketControl {
             return null;
         }
 
-        const ticket = this.tickets.shift();
+        const ticket = this.tickets.shift(); // this.tickets[0];
         ticket.escritorio = escritorio;
 
         this.ultimos4.unshift(ticket);
